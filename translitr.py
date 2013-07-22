@@ -9,12 +9,15 @@ class transliter:
     """
     def __init__(self, sequence):
         self.sequence=sequence;
+        self.exceptin_words=[u' ', u':', u'\n', u'\t', u'>', u'-', u'.'];
+        self.pass_words=[u'\u0650'];
     def arabic_to_inter(self):
         "Input of this method is the unicode type of arabic(persian) character."
         self.arabic_uni_map={};
 
         self.arabic_uni_map.setdefault(u'\u0654', 'arabic_hamza_above');
         self.arabic_uni_map.setdefault(u"\u0622", 'arabic_alef_madda_above');
+        self.arabic_uni_map.setdefault(u"\u0623", 'arabic_alef_hamza_above');
         self.arabic_uni_map.setdefault(u'ب', 'be');
         self.arabic_uni_map.setdefault(u'پ', 'pe');
         self.arabic_uni_map.setdefault(u'ت', 'te');
@@ -49,7 +52,7 @@ class transliter:
         self.arabic_uni_map.setdefault(u"\u0643", 'arabic_keh');
         self.arabic_uni_map.setdefault(u"\u06A9", 'persian_keh');
         #diacritics from here
-
+        self.arabic_uni_map.setdefault(u'\u0621', 'arabic_hamza');
         self.arabic_uni_map.setdefault(u"\u0627", 'arabic_alef');
         self.arabic_uni_map.setdefault(u"\u064b", 'arabic_fathatan');
         self.arabic_uni_map.setdefault(u"\u060C", 'arabic_comma');
@@ -71,7 +74,7 @@ class transliter:
         self.arabic_uni_map.setdefault(u"۹", 'nine');
         #self.arabic_uni_map.setdefault(u"\u0629", 'arabic_teh_marbuta');        
         #self.arabic_uni_map.setdefault(u"\u06C0", 'arabic_he_yeh_above');
-        #self.arabic_uni_map.setdefault(u"\u0626", 'arabic_yes_hamza_above');
+        self.arabic_uni_map.setdefault(u"\u0626", 'arabic_ye_hamza_above');
         #self.arabic_uni_map.setdefault(u"\u0624", 'arabic_v_hamza_above');
         #self.arabic_uni_map.setdefault(u"\u0651", 'arabic_shadda');
         #self.arabic_uni_map.setdefault(u"\u064E", 'arabic_fatha'); 
@@ -269,8 +272,10 @@ class transliter:
         self.unicode_char=u'';
         self.converted_sequence=u'';
         for char in self.sequence:
-            if char==u' ':
-                self.unicode_char=u' ';
+            if char in self.exceptin_words:
+                self.unicode_char=char;
+            elif char in self.pass_words:
+                pass
             else:
                 self.unicode_char=self.char_map[self.intermap[char]];
             self.converted_sequence=self.converted_sequence+self.unicode_char;
@@ -295,6 +300,12 @@ class transliter:
             self.converted_sequence=self.converted_sequence+self.unicode_char;
         return self.converted_sequence;
 
+
+def main():
+    input_file_all_line=codecs.open(sys.argv[1], 'r', 'utf-8').read(); 
+    ins=transliter(input_file_all_line);
+    print ins.arabic_to_unicode();
+
 if __name__=='__main__':
     ex_sent=u'من کتاب دادم';
     ins=transliter(ex_sent);
@@ -304,4 +315,5 @@ if __name__=='__main__':
     ins_2=transliter(ex_sent_2);
     print ins_2.unicode_to_arabic();
 
+    main();
 
