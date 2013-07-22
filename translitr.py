@@ -1,7 +1,7 @@
 #! /usr/bin/python
 # -*- coding:utf-8 -*-
 
-import sys, codecs;
+import sys, codecs, itertools;
 
 class transliter:
     """
@@ -9,76 +9,79 @@ class transliter:
     """
     def __init__(self, sequence):
         self.sequence=sequence;
-    def converting_to_other(self):
+    def arabic_to_inter(self):
         "Input of this method is the unicode type of arabic(persian) character."
-        self.sequence=(self.sequence).replace(u'ا', self.char_map['alf']);
-        self.sequence=(self.sequence).replace(u'ب', self.char_map['be']);
-        self.sequence=(self.sequence).replace(u'پ', self.char_map['pe']);
-        self.sequence=(self.sequence).replace(u'ت', self.char_map['te']);
-        self.sequence=(self.sequence).replace(u'ث', self.char_map['se']);
-        self.sequence=(self.sequence).replace(u'ج', self.char_map['jim']);
-        self.sequence=(self.sequence).replace(u'چ', self.char_map['ch']);
-        self.sequence=(self.sequence).replace(u'ح', self.char_map['he']);       
-        self.sequence=(self.sequence).replace(u'خ', self.char_map['x']);
-        self.sequence=(self.sequence).replace(u'د', self.char_map['d']);
-        self.sequence=(self.sequence).replace(u'ذ', self.char_map['zal']);
-        self.sequence=(self.sequence).replace(u'ر', self.char_map['r']);
-        self.sequence=(self.sequence).replace(u'ز', self.char_map['ze']);
-        self.sequence=(self.sequence).replace(u'ژ', self.char_map['je']);
-        self.sequence=(self.sequence).replace(u'س', self.char_map['se']);
-        self.sequence=(self.sequence).replace(u'ش', self.char_map['sh']);
-        self.sequence=(self.sequence).replace(u'ص', self.char_map['sad']);
-        self.sequence=(self.sequence).replace(u'ض', self.char_map['zad']);
-        self.sequence=(self.sequence).replace(u'ع', self.char_map['ein']);
-        self.sequence=(self.sequence).replace(u'غ', self.char_map['qein']);
-        self.sequence=(self.sequence).replace(u'ف', self.char_map['f']);
-        self.sequence=(self.sequence).replace(u'ق', self.char_map['qaf']);
-        self.sequence=(self.sequence).replace(u'گ', self.char_map['gaf']);
-        self.sequence=(self.sequence).replace(u'ل', self.char_map['l']);
-        self.sequence=(self.sequence).replace(u'م', self.char_map['m']);
-        self.sequence=(self.sequence).replace(u'ن', self.char_map['n']);
-        self.sequence=(self.sequence).replace(u'و', self.char_map['v']);
-        self.sequence=(self.sequence).replace(u'ه', self.char_map['h']);
-        self.sequence=(self.sequence).replace(u'ط', self.char_map['ta']);
-        self.sequence=(self.sequence).replace(u'ظ', self.char_map['za']);
-        self.sequence=(self.sequence).replace(u"\u064A", self.char_map['arabic_ye']);
-        self.sequence=(self.sequence).replace(u"\u06CC", self.char_map['persian_ye']);
-        self.sequence=(self.sequence).replace(u"\u0643", self.char_map['arabic_keh']);
-        self.sequence=(self.sequence).replace(u"\u06A9", self.char_map['persian_keh']);
+        self.arabic_uni_map={};
+
+        self.arabic_uni_map.setdefault(u'\u0654', 'arabic_hamza_above');
+        self.arabic_uni_map.setdefault(u"\u0622", 'arabic_alef_madda_above');
+        self.arabic_uni_map.setdefault(u'ب', 'be');
+        self.arabic_uni_map.setdefault(u'پ', 'pe');
+        self.arabic_uni_map.setdefault(u'ت', 'te');
+        self.arabic_uni_map.setdefault(u'ث', 'se');
+        self.arabic_uni_map.setdefault(u'ج', 'jim');
+        self.arabic_uni_map.setdefault(u'چ', 'ch');
+        self.arabic_uni_map.setdefault(u'ح', 'he');       
+        self.arabic_uni_map.setdefault(u'خ', 'x');
+        self.arabic_uni_map.setdefault(u'د', 'd');
+        self.arabic_uni_map.setdefault(u'ذ', 'zal');
+        self.arabic_uni_map.setdefault(u'ر', 'r');
+        self.arabic_uni_map.setdefault(u'ز', 'ze');
+        self.arabic_uni_map.setdefault(u'ژ', 'je');
+        self.arabic_uni_map.setdefault(u'س', 'se');
+        self.arabic_uni_map.setdefault(u'ش', 'sh');
+        self.arabic_uni_map.setdefault(u'ص', 'sad');
+        self.arabic_uni_map.setdefault(u'ض', 'zad');
+        self.arabic_uni_map.setdefault(u'ع', 'ein');
+        self.arabic_uni_map.setdefault(u'غ', 'qein');
+        self.arabic_uni_map.setdefault(u'ف', 'f');
+        self.arabic_uni_map.setdefault(u'ق', 'qaf');
+        self.arabic_uni_map.setdefault(u'گ', 'gaf');
+        self.arabic_uni_map.setdefault(u'ل', 'l');
+        self.arabic_uni_map.setdefault(u'م', 'm');
+        self.arabic_uni_map.setdefault(u'ن', 'n');
+        self.arabic_uni_map.setdefault(u'و', 'v');
+        self.arabic_uni_map.setdefault(u'ه', 'h');
+        self.arabic_uni_map.setdefault(u'ط', 'ta');
+        self.arabic_uni_map.setdefault(u'ظ', 'za');
+        self.arabic_uni_map.setdefault(u"\u064A", 'arabic_ye');
+        self.arabic_uni_map.setdefault(u"\u06CC", 'persian_ye');
+        self.arabic_uni_map.setdefault(u"\u0643", 'arabic_keh');
+        self.arabic_uni_map.setdefault(u"\u06A9", 'persian_keh');
         #diacritics from here
-        self.sequence=(self.sequence).replace(u'\u0654', self.char_map['arabic_hamza_above']);
-        self.sequence=(self.sequence).replace(u"\u0622", self.char_map['arabic_alef_madda_above']);
-        self.sequence=(self.sequence).replace(u"\u0627", self.char_map['arabic_alef']);
-        self.sequence=(self.sequence).replace(u"\u064b", self.char_map['arabic_fathatan']);
-        self.sequence=(self.sequence).replace(u"\u060C", self.char_map['arabic_comma']);
-        self.sequence=(self.sequence).replace(u"\u061B", self.char_map['arabic_semicolon']);
-        self.sequence=(self.sequence).replace(u"\u061F", self.char_map['arabic_question']);
-        self.sequence=(self.sequence).replace(u"\u066A", self.char_map['arabic_percent']);
-        self.sequence=(self.sequence).replace(u"\u00ab", self.char_map['arabic_quotation_open']);
-        self.sequence=(self.sequence).replace(u"\u00bb", self.char_map['arabic_quotation_close']);
-        self.sequence=(self.sequence).replace(u"\u200C", self.char_map['ZWNJ']);
-        self.sequence=(self.sequence).replace(u"۰", self.char_map['zero']);
-        self.sequence=(self.sequence).replace(u"۱", self.char_map['one']);
-        self.sequence=(self.sequence).replace(u"۲", self.char_map['two']);
-        self.sequence=(self.sequence).replace(u"۳", self.char_map['three']);
-        self.sequence=(self.sequence).replace(u"۴", self.char_map['four']);
-        self.sequence=(self.sequence).replace(u"۵", self.char_map['five']);
-        self.sequence=(self.sequence).replace(u"۶", self.char_map['six']);
-        self.sequence=(self.sequence).replace(u"۷", self.char_map['seven']);
-        self.sequence=(self.sequence).replace(u"۸", self.char_map['eight']);
-        self.sequence=(self.sequence).replace(u"۹", self.char_map['nine']);
-        #self.sequence=(self.sequence).replace(u"\u0629", self.char_map['arabic_teh_marbuta']);        
-        #self.sequence=(self.sequence).replace(u"\u06C0", self.char_map['arabic_he_yeh_above']);
-        #self.sequence=(self.sequence).replace(u"\u0626", self.char_map['arabic_yes_hamza_above']);
-        #self.sequence=(self.sequence).replace(u"\u0624", self.char_map['arabic_v_hamza_above']);
-        #self.sequence=(self.sequence).replace(u"\u0651", self.char_map['arabic_shadda']);
-        #self.sequence=(self.sequence).replace(u"\u064E", self.char_map['arabic_fatha']); 
-        #self.sequence=(self.sequence).replace(u'\u064F', self.char_map['arabic_damma']); 
-        #self.sequence=(self.sequence).replace(u"\u0650", self.char_map['arabic_kasra']); 
 
-        return self.sequence;
+        self.arabic_uni_map.setdefault(u"\u0627", 'arabic_alef');
+        self.arabic_uni_map.setdefault(u"\u064b", 'arabic_fathatan');
+        self.arabic_uni_map.setdefault(u"\u060C", 'arabic_comma');
+        self.arabic_uni_map.setdefault(u"\u061B", 'arabic_semicolon');
+        self.arabic_uni_map.setdefault(u"\u061F", 'arabic_question');
+        self.arabic_uni_map.setdefault(u"\u066A", 'arabic_percent');
+        self.arabic_uni_map.setdefault(u"\u00ab", 'arabic_quotation_open');
+        self.arabic_uni_map.setdefault(u"\u00bb", 'arabic_quotation_close');
+        self.arabic_uni_map.setdefault(u"\u200C", 'ZWNJ');
+        self.arabic_uni_map.setdefault(u"۰", 'zero');
+        self.arabic_uni_map.setdefault(u"۱", 'one');
+        self.arabic_uni_map.setdefault(u"۲", 'two');
+        self.arabic_uni_map.setdefault(u"۳", 'three');
+        self.arabic_uni_map.setdefault(u"۴", 'four');
+        self.arabic_uni_map.setdefault(u"۵", 'five');
+        self.arabic_uni_map.setdefault(u"۶", 'six');
+        self.arabic_uni_map.setdefault(u"۷", 'seven');
+        self.arabic_uni_map.setdefault(u"۸", 'eight');
+        self.arabic_uni_map.setdefault(u"۹", 'nine');
+        #self.arabic_uni_map.setdefault(u"\u0629", 'arabic_teh_marbuta');        
+        #self.arabic_uni_map.setdefault(u"\u06C0", 'arabic_he_yeh_above');
+        #self.arabic_uni_map.setdefault(u"\u0626", 'arabic_yes_hamza_above');
+        #self.arabic_uni_map.setdefault(u"\u0624", 'arabic_v_hamza_above');
+        #self.arabic_uni_map.setdefault(u"\u0651", 'arabic_shadda');
+        #self.arabic_uni_map.setdefault(u"\u064E", 'arabic_fatha'); 
+        #self.arabic_uni_map.setdefault(u'\u064F', 'arabic_damma'); 
+        #self.arabic_uni_map.setdefault(u"\u0650", 'arabic_kasra'); 
 
-    def original_unicode(self):
+        return self.arabic_uni_map;
+        #return self.sequence;
+
+    def unicode_original(self):
         #Defines one-to-one correspondance between arabic character and ratin character. Some diacritics is omitted because they are rarely used.
         self.char_map={};
         self.char_map.setdefault('arabic_comma', u',');
@@ -113,8 +116,8 @@ class transliter:
         self.char_map.setdefault('ein', u"'");
         self.char_map.setdefault('qein', u'q');
         self.char_map.setdefault('f', u'f');
-        self.char_map.setdefault(u'\u06A4', u'v'); #arabic veh
-        self.char_map.setdefault('qaf', u'ق');
+        #self.char_map.setdefault('v', u'\u06A4'); #arabic veh
+        self.char_map.setdefault('qaf', u'ŕ');
         self.char_map.setdefault('arabic_keh', u'K');
         self.char_map.setdefault('persian_keh', u'K');
         self.char_map.setdefault('gaf', u'g');
@@ -260,15 +263,45 @@ class transliter:
         self.sequence=(self.sequence).replace(u"\u00bb", u'}');
         self.sequence=(self.sequence).replace(u"\u200C", u'_');
         return self.sequence;
-    def main(self):
-        char_map=self.original_unicode();
-        self.sequence=self.converting_to_other();
-        return self.sequence;
+    def arabic_to_unicode(self):
+        self.char_map=self.unicode_original();
+        self.intermap=self.arabic_to_inter();
+        self.unicode_char=u'';
+        self.converted_sequence=u'';
+        for char in self.sequence:
+            if char==u' ':
+                self.unicode_char=u' ';
+            else:
+                self.unicode_char=self.char_map[self.intermap[char]];
+            self.converted_sequence=self.converted_sequence+self.unicode_char;
+        return self.converted_sequence;
+    def unicode_to_arabic(self):
+        char_map=self.unicode_original();
+        
+        del self.char_map['arabic_keh']; del self.char_map['arabic_ye'];
+        self.reversed_char_map=dict(zip(self.char_map.itervalues(), self.char_map.iterkeys())); 
+        
+        self.intermap=self.arabic_to_inter();
+        self.reversed_intermap=dict(zip(self.intermap.itervalues(), self.intermap.iterkeys()));
+        del self.reversed_intermap['arabic_ye']; del self.reversed_intermap['arabic_keh'];
+        
+        self.unicode_char=u'';
+        self.converted_sequence=u'';
+        for char in self.sequence:
+            if char==u' ':
+                self.unicode_char=u' ';
+            else:
+                self.unicode_char=self.reversed_intermap[self.reversed_char_map[char]];
+            self.converted_sequence=self.converted_sequence+self.unicode_char;
+        return self.converted_sequence;
 
 if __name__=='__main__':
     ex_sent=u'من کتاب دادم';
     ins=transliter(ex_sent);
-    print ins.main();
+    print ins.arabic_to_unicode();
 
+    ex_sent_2=u'mn tw ra dÝdm';
+    ins_2=transliter(ex_sent_2);
+    print ins_2.unicode_to_arabic();
 
 
