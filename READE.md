@@ -50,7 +50,7 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 | غ | qeyn | U+063A | q |  
 | ف | fe | U+0641 | f |  
 | ق | qaf | U+0642 | ŕ |  
-| ک | persian-kaf | K |  
+| ک | persian-kaf | U+06A9 | K |  
 |   | arabic-kaf | U+0643 | K |  
 | گ | gaf | U+06AF | g |  
 | ل | lam | U+0644 | l |  
@@ -58,8 +58,8 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 | ن | nun | U+0646 | n |  
 | و | vav | U+0645 | w |  
 | ه | he | U+0647 | h |  
-| ی | persian-ye |  | Ý |    
-|   | arabic-ye | U+0649 | Y |  
+| ی | persian-ye | U+06CC | Ý |    
+|   | arabic-ye | U+064A | Y |  
 | ، | arabic_comma | U+060C | , |  
 | ؛ | arabic_semicolon | U+061B | ; |  
 | ؟ | arabic_question | U+061F | ? |  
