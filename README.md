@@ -1,6 +1,8 @@
 ## What's this?
 Character mapping script from arabic to latin. This original style does not have same mapping. In other words, all mappings are the one-to-one correspondances. Thus, this script can map without loosing the original character information.
 
+For latin characters, I used Latin Supplement, Latin Extended-A, Latin Extended-B characters. To make available a keyboard that includes Latin Supplement, Latin Extended-A, Latin Extended-B, please see http://symbolcodes.tlt.psu.edu/accents/codemacext.html
+
 ## Usage 
 To get romanized characters, codes like below in `if __name__=='__main__'` 
 ````
@@ -17,6 +19,8 @@ print ins_2.unicode_to_arabic();
 ````
 
 ## Converting table
+
+### Note: I recommend to remove all diacritics before you convert to latin characters. To remove them, please use `def clean_up()`
 
 This class converts arabic characters to ratin characters. Not all characters are supported, but basic characters are completly converted. I think that enought to express normal writing style.
 

@@ -1,7 +1,9 @@
 #! /usr/bin/python
 # -*- coding:utf-8 -*-
+__authot__='Kensuke Mitsuzawa';
+__version__='0.01';
 
-import sys, codecs, itertools;
+import sys, codecs, itertools, re;
 
 class transliter:
     """
@@ -9,8 +11,22 @@ class transliter:
     """
     def __init__(self, sequence):
         self.sequence=sequence;
-        self.exceptin_words=[u' ', u':', u'\n', u'\t', u'>', u'-', u'.'];
-        self.pass_words=[u'\u0650'];
+        self.exceptin_words=[u' ', u':', u'\n', u'\t', u'>', u'-', u'.', u'\u0650'];
+    
+    def clean_up(self): 
+        #Diacritics
+        diacritics = set([u'\u0610',u'\u0611',u'\u0612',u'\u0613',u'\u0614',u'\u0615',u'\u0616',
+                          u'\u0617',u'\u0618',u'\u0619',u'\u061a',u'\u064b',u'\u064c',u'\u064d',
+                          u'\u064e',u'\u064f',u'\u0650',u'\u0651',u'\u0652',u'\u0653',u'\u0654',
+                          u'\u0655',u'\u0656',u'\u0657',u'\u0658',u'\u0659',u'\u065a',u'\u065b',
+                          u'\u065c',u'\u065d',u'\u065e',u'\u065f',u'\u0670',u'\u06d6',u'\u06d7',
+                          u'\u06d8',u'\u06d9',u'\u06da',u'\u06db',u'\u06dc',u'\u06df',u'\u06e0',
+                          u'\u06e1',u'\u06e2',u'\u06e3',u'\u06e4',u'\u06e7',u'\u06e8',u'\u06ea',
+                          u'\u06eb',u'\u06ec',u'\u06ed'])
+        for item in diacritics:
+            self.cleaned_sequence=re.sub(item, u'', self.sequence);    
+        return self.cleaned_sequence; 
+    
     def arabic_to_inter(self):
         "Input of this method is the unicode type of arabic(persian) character."
         self.arabic_uni_map={};
@@ -269,13 +285,15 @@ class transliter:
     def arabic_to_unicode(self):
         self.char_map=self.unicode_original();
         self.intermap=self.arabic_to_inter();
+        #remove diacritic_marks form input sequece
+        self.cleaned_sequence=self.clean_up();
         self.unicode_char=u'';
         self.converted_sequence=u'';
         for char in self.sequence:
             if char in self.exceptin_words:
                 self.unicode_char=char;
-            elif char in self.pass_words:
-                pass
+            elif char not in self.intermap:
+                self.unicode_char=char; 
             else:
                 self.unicode_char=self.char_map[self.intermap[char]];
             self.converted_sequence=self.converted_sequence+self.unicode_char;
@@ -315,5 +333,5 @@ if __name__=='__main__':
     ins_2=transliter(ex_sent_2);
     print ins_2.unicode_to_arabic();
 
-    main();
+    #main();
 
