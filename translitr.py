@@ -1,7 +1,7 @@
-#! /usr/bin/python
+
 # -*- coding:utf-8 -*-
 __authot__='Kensuke Mitsuzawa';
-__version__='0.01';
+__version__='0.02';
 
 import sys, codecs, itertools, re;
 
@@ -37,7 +37,7 @@ class transliter:
         self.arabic_uni_map.setdefault(u'ب', 'be');
         self.arabic_uni_map.setdefault(u'پ', 'pe');
         self.arabic_uni_map.setdefault(u'ت', 'te');
-        self.arabic_uni_map.setdefault(u'ث', 'se');
+        self.arabic_uni_map.setdefault(u'ث', 'se_1');
         self.arabic_uni_map.setdefault(u'ج', 'jim');
         self.arabic_uni_map.setdefault(u'چ', 'ch');
         self.arabic_uni_map.setdefault(u'ح', 'he');       
@@ -47,7 +47,7 @@ class transliter:
         self.arabic_uni_map.setdefault(u'ر', 'r');
         self.arabic_uni_map.setdefault(u'ز', 'ze');
         self.arabic_uni_map.setdefault(u'ژ', 'je');
-        self.arabic_uni_map.setdefault(u'س', 'se');
+        self.arabic_uni_map.setdefault(u'س', 'se_2');
         self.arabic_uni_map.setdefault(u'ش', 'sh');
         self.arabic_uni_map.setdefault(u'ص', 'sad');
         self.arabic_uni_map.setdefault(u'ض', 'zad');
@@ -117,7 +117,7 @@ class transliter:
         self.char_map.setdefault('be', u'b');
         self.char_map.setdefault('arabic_heh_hamza_above', u'T');
         self.char_map.setdefault('te', u't');
-        self.char_map.setdefault('se', u'ç');
+        self.char_map.setdefault('se_1', u'ç');
         self.char_map.setdefault('jim', u'j');
         self.char_map.setdefault('he', u'ħ');
         self.char_map.setdefault('x', u'x');
@@ -126,7 +126,7 @@ class transliter:
         self.char_map.setdefault('r', u'r');
         self.char_map.setdefault('arabic_r_small_v_below', u'ř');
         self.char_map.setdefault('ze', u'z');
-        self.char_map.setdefault('se', u's');
+        self.char_map.setdefault('se_2', u's');
         self.char_map.setdefault('sh', u'š');
         self.char_map.setdefault('sad', u'ş');
         self.char_map.setdefault('zad', u'ź');
@@ -311,8 +311,8 @@ class transliter:
         self.unicode_char=u'';
         self.converted_sequence=u'';
         for char in self.sequence:
-            if char==u' ':
-                self.unicode_char=u' ';
+            if char not in self.reversed_char_map:
+                self.unicode_char=char;
             else:
                 self.unicode_char=self.reversed_intermap[self.reversed_char_map[char]];
             self.converted_sequence=self.converted_sequence+self.unicode_char;
@@ -321,8 +321,15 @@ class transliter:
 
 def main():
     input_file_all_line=codecs.open(sys.argv[1], 'r', 'utf-8').read(); 
+    unicode_writeout=codecs.open('unicode_sequecen', 'w', 'utf-8');
     ins=transliter(input_file_all_line);
-    print ins.arabic_to_unicode();
+    unicode_sequence=ins.arabic_to_unicode();
+    unicode_writeout.write(unicode_sequence);
+
+    arabic_sequence=codecs.open('reveresed_arabic', 'w', 'utf-8');
+    ins_2=transliter(unicode_sequence);
+    reversed_arabic_sequence=ins_2.unicode_to_arabic();
+    arabic_sequence.write(reversed_arabic_sequence);
 
 if __name__=='__main__':
     ex_sent=u'من کتاب دادم';
@@ -333,5 +340,5 @@ if __name__=='__main__':
     ins_2=transliter(ex_sent_2);
     print ins_2.unicode_to_arabic();
 
-    #main();
+    main();
 

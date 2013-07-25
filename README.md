@@ -76,6 +76,10 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 |   | arabic_hamza | U+0621 | ° |  
 |   | arabic_fathatan | U+0642 | e | 
 
+## Update
+v0.01: First Version  
+v0.02: fixed bug that ث س have the same mapping 'se'. changed ث to se¥_1 and س  to se¥_2.
+
 
 ## TODO
 
