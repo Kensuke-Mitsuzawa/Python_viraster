@@ -30,7 +30,7 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 | Arabic_character | Arabic_character_commonly_called | unicode_number(Hex) | mapped_ratin |  
 |-----------------:|:--------------------------------:|:-------------------:|:------------:| 
 | ا | alef | U+0627 | a |  
-| آ | alef_alef_madda_above | U+0622 | ā |  
+| آ | alef_madda_above | U+0622 | ā |  
 | ب | be | U+06FF | b |  
 | پ | pe | U+067E | p |  
 | ت | te | U+062A | t |  
