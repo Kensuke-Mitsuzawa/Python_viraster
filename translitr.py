@@ -1,7 +1,7 @@
 
 # -*- coding:utf-8 -*-
 __authot__='Kensuke Mitsuzawa';
-__version__='0.02';
+__version__='0.03';
 
 import sys, codecs, itertools, re;
 
@@ -63,6 +63,7 @@ class transliter:
         self.arabic_uni_map.setdefault(u'ه', 'h');
         self.arabic_uni_map.setdefault(u'ط', 'ta');
         self.arabic_uni_map.setdefault(u'ظ', 'za');
+        self.arabic_uni_map.setdefault(u'\u0649', 'alef_maksusa'); #U0649 is ARABIC_ALEF_MAKSUSA
         self.arabic_uni_map.setdefault(u"\u064A", 'arabic_ye');
         self.arabic_uni_map.setdefault(u"\u06CC", 'persian_ye');
         self.arabic_uni_map.setdefault(u"\u0643", 'arabic_keh');
@@ -145,7 +146,8 @@ class transliter:
         self.char_map.setdefault('n', u'n');
         self.char_map.setdefault('h', u'h');
         self.char_map.setdefault('v', u'w');
-        self.char_map.setdefault('persian_ye', u'Ý');
+        self.char_map.setdefault('persian_ye', u'y');
+        self.char_map.setdefault('alef_maksusa', u'Ý');
         self.char_map.setdefault('arabic_ye', u'Y');
         self.char_map.setdefault('arabic_fathatan', u'e');
         self.char_map.setdefault('arabic_hamza_above', u'`');

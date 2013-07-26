@@ -62,8 +62,9 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 | ن | nun | U+0646 | n |  
 | و | vav | U+0645 | w |  
 | ه | he | U+0647 | h |  
-| ی | persian-ye | U+06CC | Ý |    
-|   | arabic-ye | U+064A | Y |  
+| ی | persian-ye | U+06CC | y |    
+| ي | arabic-ye | U+064A | Y |
+| ى | arabic_alef_maksusa | U+0649 | Ý |  
 | ، | arabic_comma | U+060C | , |  
 | ؛ | arabic_semicolon | U+061B | ; |  
 | ؟ | arabic_question | U+061F | ? |  
@@ -79,7 +80,7 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 ## Update
 v0.01: First Version  
 v0.02: fixed bug that ث س have the same mapping 'se'. changed ث to se¥_1 and س  to se¥_2.
-
+v0.03: added 'ARABIC_ALEF_MAKSUSA' and its mapping to 'Ý'. 'PERSIAN_YEH' and its mapping is changed to 'y'.
 
 ## TODO
 
