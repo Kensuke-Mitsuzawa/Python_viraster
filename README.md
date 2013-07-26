@@ -61,7 +61,7 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 | م | mim | U+0645 | m |  
 | ن | nun | U+0646 | n |  
 | و | vav | U+0645 | w |  
-| ه | he | U+0647 | h |  
+| ه | he | U+0647 | e |  
 | ی | persian-ye | U+06CC | y |    
 | ي | arabic-ye | U+064A | Y |
 | ى | arabic_alef_maksusa | U+0649 | Ý |  
@@ -75,12 +75,12 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 |   | arabic_hamza_below | U+0655 | E |  
 |   | arabic_alef_hamza_above | U+0623 | á |  
 |   | arabic_hamza | U+0621 | ° |  
-|   | arabic_fathatan | U+0642 | e | 
 
 ## Update
 v0.01: First Version  
-v0.02: fixed bug that ث س have the same mapping 'se'. changed ث to se¥_1 and س  to se¥_2.
-v0.03: added 'ARABIC_ALEF_MAKSUSA' and its mapping to 'Ý'. 'PERSIAN_YEH' and its mapping is changed to 'y'.
+v0.02: fixed bug that ث س have the same mapping 'se'. changed ث to se¥_1 and س  to se¥_2.  
+v0.03: added 'ARABIC_ALEF_MAKSUSA' and its mapping to 'Ý'. 'PERSIAN_YEH' and its mapping is changed to 'y'.  
+v0.04: changed a mapping of 'persian_kaf' to 'k'. The mappig 'ه' to 'h' is disused. Instead, 'e' is used for 'ه'. 'arabic_fathatan' is disused.  
 
 ## TODO
 

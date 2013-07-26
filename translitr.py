@@ -1,7 +1,7 @@
 
 # -*- coding:utf-8 -*-
 __authot__='Kensuke Mitsuzawa';
-__version__='0.03';
+__version__='0.04';
 
 import sys, codecs, itertools, re;
 
@@ -71,7 +71,7 @@ class transliter:
         #diacritics from here
         self.arabic_uni_map.setdefault(u'\u0621', 'arabic_hamza');
         self.arabic_uni_map.setdefault(u"\u0627", 'arabic_alef');
-        self.arabic_uni_map.setdefault(u"\u064b", 'arabic_fathatan');
+        #self.arabic_uni_map.setdefault(u"\u064b", 'arabic_fathatan');
         self.arabic_uni_map.setdefault(u"\u060C", 'arabic_comma');
         self.arabic_uni_map.setdefault(u"\u061B", 'arabic_semicolon');
         self.arabic_uni_map.setdefault(u"\u061F", 'arabic_question');
@@ -139,17 +139,17 @@ class transliter:
         #self.char_map.setdefault('v', u'\u06A4'); #arabic veh
         self.char_map.setdefault('qaf', u'ŕ');
         self.char_map.setdefault('arabic_keh', u'K');
-        self.char_map.setdefault('persian_keh', u'K');
+        self.char_map.setdefault('persian_keh', u'k');
         self.char_map.setdefault('gaf', u'g');
         self.char_map.setdefault('l', u'l');
         self.char_map.setdefault('m', u'm');
         self.char_map.setdefault('n', u'n');
-        self.char_map.setdefault('h', u'h');
+        self.char_map.setdefault('h', u'e');
         self.char_map.setdefault('v', u'w');
         self.char_map.setdefault('persian_ye', u'y');
         self.char_map.setdefault('alef_maksusa', u'Ý');
         self.char_map.setdefault('arabic_ye', u'Y');
-        self.char_map.setdefault('arabic_fathatan', u'e');
+        #self.char_map.setdefault('arabic_fathatan', u'e');
         self.char_map.setdefault('arabic_hamza_above', u'`');
         self.char_map.setdefault('ch', u'č');
         self.char_map.setdefault('pe', u'p');
