@@ -14,7 +14,7 @@ def transliteration_whole(input_file_path, output_file_path):
     with codecs.open(input_file_path, 'r', 'utf-8') as input_line:
         for line in input_line:    
             Ins=translitr.transliter(line);
-            print [Ins.arabic_to_unicode()];
+            #print [Ins.arabic_to_unicode()];
             out.write(Ins.arabic_to_unicode());
     out.close();
 
