@@ -74,13 +74,15 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 |   | arabic_hamza_above | U+0654 | ú |  
 |   | arabic_hamza_below | U+0655 | E |  
 |   | arabic_alef_hamza_above | U+0623 | á |  
-|   | arabic_hamza | U+0621 | ° |  
+|   | arabic_hamza | U+0621 | ° |
+| ٫ | arabic_decimal_separator | U+066B | ⎖ |    
 
 ## Update
 v0.01: First Version  
 v0.02: fixed bug that ث س have the same mapping 'se'. changed ث to se¥_1 and س  to se¥_2.  
 v0.03: added 'ARABIC_ALEF_MAKSUSA' and its mapping to 'Ý'. 'PERSIAN_YEH' and its mapping is changed to 'y'.  
 v0.04: changed a mapping of 'persian_kaf' to 'k'. The mappig 'ه' to 'h' is disused. Instead, 'e' is used for 'ه'. 'arabic_fathatan' is disused.  
+v0.05: Added new map for arabic tatweel and arabic decimal separator. An arabic tatweel is \u0640 in unicode and is reffered as keyname 'arabic_tatweel' in code. An arabic decimal separator is \u066b in unicode, and is reffered as keyname 'arabic_decimal_separator' in code.
 
 ## TODO
 

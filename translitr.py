@@ -1,7 +1,7 @@
 
 # -*- coding:utf-8 -*-
 __authot__='Kensuke Mitsuzawa';
-__version__='0.04';
+__version__='0.05';
 
 import sys, codecs, itertools, re;
 
@@ -69,6 +69,8 @@ class transliter:
         self.arabic_uni_map.setdefault(u"\u0643", 'arabic_keh');
         self.arabic_uni_map.setdefault(u"\u06A9", 'persian_keh');
         #diacritics from here
+        self.arabic_uni_map.setdefault(u'\u066b', 'arabic_decimal_separator');
+        self.arabic_uni_map.setdefault(u'\u0640', 'arabic_tatweel'); #arabic_tatweel 'ـ'
         self.arabic_uni_map.setdefault(u'\u0621', 'arabic_hamza');
         self.arabic_uni_map.setdefault(u"\u0627", 'arabic_alef');
         #self.arabic_uni_map.setdefault(u"\u064b", 'arabic_fathatan');
@@ -171,6 +173,8 @@ class transliter:
         self.char_map.setdefault("arabic_percent", u'%');
         self.char_map.setdefault("arabic_quotation_open", u'{');
         self.char_map.setdefault("arabic_quotation_close", u'}');
+        self.char_map.setdefault('arabic_tatweel', u'=');
+        self.char_map.setdefault('arabic_decimal_separator', u'\u2396'); #\u2396 is ⎖, decimal separator key symbol 
 
         return self.char_map;
 
