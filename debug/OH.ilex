@@ -1,0 +1,20 @@
+yarb	inv	100;Lemma;INTexcl;;cat=INTexcl;%default	# 1/2=0.5
+ay	inv	300;Lemma;INTexcl;;cat=INTexcl;%default	# 236/263=0.89	# Known to the PPD: ay
+ayea	inv	100;Lemma;INTexcl;;cat=INTexcl;%default	# 1/5=0.2
+ala	inv	300;Lemma;INTexcl;;cat=INTexcl;%default	# 5/34=0.14	# Known to the PPD: ala
+aley	inv	300;Lemma;INTexcl;;cat=INTexcl;%default	# 8/306=0.02	# Known to the PPD: aley
+ean	inv	300;Lemma;INTexcl;;cat=INTexcl;%default	# 5/9=0.55	# Known to the PPD: ean
+ngara	inv	100;Lemma;INTexcl;;cat=INTexcl;%default	# 1/1=1
+prwrdgara	inv	100;Lemma;INTexcl;;cat=INTexcl;%default	# 16/29=0.55
+walle	inv	300;Lemma;INTexcl;;cat=INTexcl;%default	# 2/5=0.4	# Known to the PPD: walle
+xdaya	inv	100;Lemma;INTexcl;;cat=INTexcl;%default	# 9/17=0.52
+xwša	inv	300;Lemma;INTexcl;;cat=INTexcl;%default	# 1/2=0.5	# Known to the PPD: xwša
+āy	inv	200;Lemma;INTexcl;;cat=INTexcl;%default	# 1/5=0.2	# Known to the PPD: āy
+āeay	inv	200;Lemma;INTexcl;;cat=INTexcl;%default	# 1/3=0.33	# Known to the PPD: āeay
+šenšaea	inv	100;Lemma;INTexcl;;cat=INTexcl;%default	# 1/1=1
+šeryara	inv	100;Lemma;INTexcl;;cat=INTexcl;%default	# 1/1=1
+ħafẓa	inv	100;Lemma;INTexcl;;cat=INTexcl;%default	# 2/4=0.5
+zea ze	inv	100;Lemma;INTexcl;;cat=INTexcl;%default	# 1/1=1
+rebra	inv	100;Lemma;INTexcl;;cat=INTexcl;%default	# /3=0
+xdawnda	inv	100;Lemma;INTexcl;;cat=INTexcl;%default	# /5=0
+āŕa	inv	200;Lemma;INTexcl;;cat=INTexcl;%default	# /177=0	# Known to the PPD: āŕa
