@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 __author__='Kensuke Mitsuzawa'
-__version__='2013/7/25'
+__version__='2013/09/02'
 
 import translitr, sys, re, argparse, codecs;
 
