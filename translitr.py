@@ -1,7 +1,7 @@
 
 # -*- coding:utf-8 -*-
 __authot__='Kensuke Mitsuzawa';
-__version__='0.06';
+__version__='0.07';
 
 import sys, codecs, itertools, re;
 
@@ -73,7 +73,6 @@ class transliter:
         self.arabic_uni_map.setdefault(u'\u0640', 'arabic_tatweel'); #arabic_tatweel 'ـ'
         self.arabic_uni_map.setdefault(u'\u0621', 'arabic_hamza');
         self.arabic_uni_map.setdefault(u"\u0627", 'arabic_alef');
-        #self.arabic_uni_map.setdefault(u"\u064b", 'arabic_fathatan');
         self.arabic_uni_map.setdefault(u"\u060C", 'arabic_comma');
         self.arabic_uni_map.setdefault(u"\u061B", 'arabic_semicolon');
         self.arabic_uni_map.setdefault(u"\u061F", 'arabic_question');
@@ -103,6 +102,7 @@ class transliter:
         self.arabic_uni_map.setdefault(u'\u0629', 'arabic_heh_marbuta');
         self.arabic_uni_map.setdefault(u'\u06c0', 'arabic_heh_hamza_above');
         self.arabic_uni_map.setdefault(u'\u0695', 'arabic_r_small_v_below'); #u0695 is ڕ
+        self.arabic_uni_map.setdefault(u'\u064b', 'arabic_fathatan'); 
 
         return self.arabic_uni_map;
         #return self.sequence;
@@ -155,7 +155,7 @@ class transliter:
         self.char_map.setdefault('persian_ye', u'y');
         self.char_map.setdefault('alef_maksusa', u'Ý');
         self.char_map.setdefault('arabic_ye', u'Y');
-        #self.char_map.setdefault('arabic_fathatan', u'e');
+        self.char_map.setdefault('arabic_fathatan', u'\u02dd');
         self.char_map.setdefault('arabic_hamza_above', u'`');
         self.char_map.setdefault('ch', u'č');
         self.char_map.setdefault('pe', u'p');
