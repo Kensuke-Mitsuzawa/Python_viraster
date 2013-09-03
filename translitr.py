@@ -1,7 +1,7 @@
 
 # -*- coding:utf-8 -*-
 __authot__='Kensuke Mitsuzawa';
-__version__='0.05';
+__version__='0.06';
 
 import sys, codecs, itertools, re;
 
