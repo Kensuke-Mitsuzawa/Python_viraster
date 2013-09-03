@@ -83,7 +83,7 @@ v0.02: fixed bug that ث س have the same mapping 'se'. changed ث to se¥_1 and
 v0.03: added 'ARABIC_ALEF_MAKSUSA' and its mapping to 'Ý'. 'PERSIAN_YEH' and its mapping is changed to 'y'.  
 v0.04: changed a mapping of 'persian_kaf' to 'k'. The mappig 'ه' to 'h' is disused. Instead, 'e' is used for 'ه'. 'arabic_fathatan' is disused.  
 v0.05: Added new map for arabic tatweel and arabic decimal separator. An arabic tatweel is \u0640 in unicode and is reffered as keyname 'arabic_tatweel' in code. An arabic decimal separator is \u066b in unicode, and is reffered as keyname 'arabic_decimal_separator' in code.
-
+v0.06: some character + diacritic is added. u+0625, u+0629, u+06c0, u+0695, u+0624
 ## TODO
 
 * u'\u0626'(Arabic ye hamza above) and u'\u0650'(Arabic Kasra) causes error. I don't wanna use such diacritic marks in unicode text. It's desirable to move out such diacritics before this script.  

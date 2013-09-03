@@ -94,11 +94,15 @@ class transliter:
         #self.arabic_uni_map.setdefault(u"\u0629", 'arabic_teh_marbuta');        
         #self.arabic_uni_map.setdefault(u"\u06C0", 'arabic_he_yeh_above');
         self.arabic_uni_map.setdefault(u"\u0626", 'arabic_ye_hamza_above');
-        #self.arabic_uni_map.setdefault(u"\u0624", 'arabic_v_hamza_above');
+        self.arabic_uni_map.setdefault(u"\u0624", 'arabic_va_hamza_above');
         #self.arabic_uni_map.setdefault(u"\u0651", 'arabic_shadda');
         #self.arabic_uni_map.setdefault(u"\u064E", 'arabic_fatha'); 
         #self.arabic_uni_map.setdefault(u'\u064F', 'arabic_damma'); 
-        #self.arabic_uni_map.setdefault(u"\u0650", 'arabic_kasra'); 
+        #self.arabic_uni_map.setdefault(u"\u0650", 'arabic_kasra');
+        self.arabic_uni_map.setdefault(u'\u0625', 'arabic_alef_hamza_below');
+        self.arabic_uni_map.setdefault(u'\u0629', 'arabic_heh_marbuta');
+        self.arabic_uni_map.setdefault(u'\u06c0', 'arabic_heh_hamza_above');
+        self.arabic_uni_map.setdefault(u'\u0695', 'arabic_r_small_v_below'); #u0695 is ڕ
 
         return self.arabic_uni_map;
         #return self.sequence;
@@ -118,7 +122,7 @@ class transliter:
         self.char_map.setdefault('alf', u'a');
         self.char_map.setdefault('arabic_alef', u'a');
         self.char_map.setdefault('be', u'b');
-        self.char_map.setdefault('arabic_heh_hamza_above', u'T');
+        self.char_map.setdefault('arabic_heh_marbuta', u'T');
         self.char_map.setdefault('te', u't');
         self.char_map.setdefault('se_1', u'ç');
         self.char_map.setdefault('jim', u'j');
