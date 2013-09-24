@@ -8,6 +8,6 @@ do
 	newpath=`echo $filepath | sed "s|$DIRPATH||" `
 	OUTPATH=$TARGET_DIRPATH$newpath
 	echo $OUTPATH
-	python for_dataset.py -m l_a $filepath $OUTPATH
+	python for_dataset.py -m l_a -w True $filepath $OUTPATH
 done
 

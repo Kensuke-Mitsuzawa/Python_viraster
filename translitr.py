@@ -1,7 +1,8 @@
 
 # -*- coding:utf-8 -*-
 __authot__='Kensuke Mitsuzawa';
-__version__='0.07';
+__version__='0.08';
+__date__='2013/09/25';
 
 import sys, codecs, itertools, re;
 
@@ -15,16 +16,19 @@ class transliter:
     
     def clean_up(self): 
         #Diacritics
-        diacritics = set([u'\u0610',u'\u0611',u'\u0612',u'\u0613',u'\u0614',u'\u0615',u'\u0616',
+        diacritics = [u'\u0610',u'\u0611',u'\u0612',u'\u0613',u'\u0614',u'\u0615',u'\u0616',
                           u'\u0617',u'\u0618',u'\u0619',u'\u061a',u'\u064b',u'\u064c',u'\u064d',
                           u'\u064e',u'\u064f',u'\u0650',u'\u0651',u'\u0652',u'\u0653',u'\u0654',
                           u'\u0655',u'\u0656',u'\u0657',u'\u0658',u'\u0659',u'\u065a',u'\u065b',
                           u'\u065c',u'\u065d',u'\u065e',u'\u065f',u'\u0670',u'\u06d6',u'\u06d7',
                           u'\u06d8',u'\u06d9',u'\u06da',u'\u06db',u'\u06dc',u'\u06df',u'\u06e0',
                           u'\u06e1',u'\u06e2',u'\u06e3',u'\u06e4',u'\u06e7',u'\u06e8',u'\u06ea',
-                          u'\u06eb',u'\u06ec',u'\u06ed'])
-        for item in diacritics:
-            self.cleaned_sequence=re.sub(item, u'', self.sequence);    
+                          u'\u06eb',u'\u06ec',u'\u06ed']
+        
+        for char in self.sequence: 
+            if char in diacritics:
+                self.cleaned_sequence=self.sequence.replace(char, u'');
+
         return self.cleaned_sequence; 
     
     def arabic_to_inter(self):
@@ -182,116 +186,6 @@ class transliter:
 
         return self.char_map;
 
-    def conv_map_iso_233_3_1999(self):
-        #character mapping to ISO 233-3:1999
-        # I don't recommend use this mapping because this irreversible, I mean 3 'zar','ze','za' character has same mapping roman character 'z' and it's impossible to change to arabic correctly again.
-        self.char_map={};
-        self.char_map.setdefault('alf', u'â');
-        self.char_map.setdefault('arabic_alef_madda_above', u'ā'); #modified to distinguish from normal â
-        self.char_map.setdefault('be', u'b');
-        self.char_map.setdefault('pe', u'p');
-        self.char_map.setdefault('te', u't');
-        self.char_map.setdefault('se', u'\u0304\u0073'); #replced to macron+s
-        self.char_map.setdefault('jim', u'j');
-        self.char_map.setdefault('ch', u'c');
-        self.char_map.setdefault('he', u'\u0307\u0068'); #replace to dot_above+h 
-        self.char_map.setdefault('x', u'\u0304\u006B') #replace to macron+k
-        self.char_map.setdefault('d', u'd');
-        self.char_map.setdefault('zal', u'\u0304\u007A') #replace to macron+z
-        self.char_map.setdefault('r', u'r');
-        self.char_map.setdefault('ze', u'z');
-        self.char_map.setdefault('je', u'z');
-        self.char_map.setdefault('se', u's');
-        self.char_map.setdefault('sh', u'\u0161'); #caron s
-        self.char_map.setdefault('sad', u'\u0307\u0073'); #replace to dot_above+s
-        self.char_map.setdefault('zad', u'\u0307\u007A'); #dot_above+z
-        self.char_map.setdefault('t2', u'\u0307\u0074');
-        self.char_map.setdefault('zad', u'z');
-        self.char_map.setdefault('ein', u'‘');
-        self.char_map.setdefault('gein', u'\u0307\u0067'); #dot_above+g
-        self.char_map.setdefault('f', u'\u0307\u0066');
-        self.char_map.setdefault('qaf', u'q');
-        self.char_map.setdefault('arabic_keh', u'k');
-        self.char_map.setdefault('persian_keh', u'k');
-        self.char_map.setdefault('gaf', u'q');
-        self.char_map.setdefault('l', u'l');
-        self.char_map.setdefault('m', u'm');
-        self.char_map.setdefault('n', u'n');
-        self.char_map.setdefault('v', u'v');
-        self.char_map.setdefault('h', u'h');
-        self.char_map.setdefault('arabic_ye', u'y');
-        self.char_map.setdefault('persian_ye', u'y');
-        self.char_map.setdefault('arabic_heh_hamza_above', u'X');
-        self.char_map.setdefault('zero', u'0');
-        self.char_map.setdefault('one', u'1');
-        self.char_map.setdefault('two', u'2');
-        self.char_map.setdefault('three', u'3');
-        self.char_map.setdefault('four', u'4');
-        self.char_map.setdefault('five', u'5');
-        self.char_map.setdefault('six', u'6');
-        self.char_map.setdefault('seven', u'7');
-        self.char_map.setdefault('eight', u'8');
-        self.char_map.setdefault('nine', u'9');
-        self.char_map.setdefault('ZWNJ', u'_');
-
-        return self.char_map;
-    def fa_to_dehdari(self):
-        #This code is following Jon Dehdari's converting chart See:http://www.ling.ohio-state.edu/~jonsafari/persian_charmaps.pdf
-        self.sequence=(self.sequence).replace(u'ا', u'A');
-        self.sequence=(self.sequence).replace(u'ب', u'b');
-        self.sequence=(self.sequence).replace(u'پ', u'p');
-        self.sequence=(self.sequence).replace(u'ت', u't');
-        self.sequence=(self.sequence).replace(u'ث', u'V');
-        self.sequence=(self.sequence).replace(u'ج', u'j');
-        self.sequence=(self.sequence).replace(u'چ', u'c');
-        self.sequence=(self.sequence).replace(u'ح', u'H');       
-        self.sequence=(self.sequence).replace(u'خ', u'x');
-        self.sequence=(self.sequence).replace(u'د', u'd');
-        self.sequence=(self.sequence).replace(u'ذ', u'L');
-        self.sequence=(self.sequence).replace(u'ر', u'r');
-        self.sequence=(self.sequence).replace(u'ز', u'z');
-        self.sequence=(self.sequence).replace(u'ژ', u'J');
-        self.sequence=(self.sequence).replace(u'ژ', u'J');
-        self.sequence=(self.sequence).replace(u'س', u's');
-        self.sequence=(self.sequence).replace(u'ش', u'C');
-        self.sequence=(self.sequence).replace(u'ص', u'S');
-        self.sequence=(self.sequence).replace(u'ض', u'D');
-        self.sequence=(self.sequence).replace(u'ط', u'T');
-        self.sequence=(self.sequence).replace(u'ظ', u'Z');
-        self.sequence=(self.sequence).replace(u'ع', u'E');
-        self.sequence=(self.sequence).replace(u'غ', u'G');
-        self.sequence=(self.sequence).replace(u'ف', u'f');
-        self.sequence=(self.sequence).replace(u'ق', u'q');
-        self.sequence=(self.sequence).replace(u'ك', u'K');
-        self.sequence=(self.sequence).replace(u'گ', u'g');
-        self.sequence=(self.sequence).replace(u'ل', u'l');
-        self.sequence=(self.sequence).replace(u'م', u'm');
-        self.sequence=(self.sequence).replace(u'ن', u'n');
-        self.sequence=(self.sequence).replace(u'و', u'u');
-        self.sequence=(self.sequence).replace(u'ه', u'h');
-        self.sequence=(self.sequence).replace(u"\u064A", u'y'); 
-        self.sequence=(self.sequence).replace(u"\u064E", u'a'); 
-        self.sequence=(self.sequence).replace(u'\u064f', u'o'); 
-        self.sequence=(self.sequence).replace(u"\u0650", u'e'); 
-        self.sequence=(self.sequence).replace(u"\u0622", u'0');#Is it valid? I think it's simply mistake...
-        self.sequence=(self.sequence).replace(u"\u0627", u'0');
-        self.sequence=(self.sequence).replace(u"\u0629", u'P');
-        self.sequence=(self.sequence).replace(u"\u06A9", u'k');
-        self.sequence=(self.sequence).replace(u"\u06cc", u'i');
-        self.sequence=(self.sequence).replace(u"\u0621", u'M');
-        self.sequence=(self.sequence).replace(u"\u06C0", u'X');
-        self.sequence=(self.sequence).replace(u"\u0626", u'I');
-        self.sequence=(self.sequence).replace(u"\u0624", u'U');
-        self.sequence=(self.sequence).replace(u"\u064b", u'N');
-        self.sequence=(self.sequence).replace(u"\u0651", u'~');        
-        self.sequence=(self.sequence).replace(u"\u060C", u',');
-        self.sequence=(self.sequence).replace(u"\u061B", u';');
-        self.sequence=(self.sequence).replace(u"\u061F", u'?');
-        self.sequence=(self.sequence).replace(u"\u066A", u'%');
-        self.sequence=(self.sequence).replace(u"\u00ab", u'{');
-        self.sequence=(self.sequence).replace(u"\u00bb", u'}');
-        self.sequence=(self.sequence).replace(u"\u200C", u'_');
-        return self.sequence;
     def arabic_to_unicode(self):
         self.char_map=self.unicode_original();
         self.intermap=self.arabic_to_inter();
@@ -299,7 +193,7 @@ class transliter:
         self.cleaned_sequence=self.clean_up();
         self.unicode_char=u'';
         self.converted_sequence=u'';
-        for char in self.sequence:
+        for char in self.cleaned_sequence:
             if char in self.exceptin_words:
                 self.unicode_char=char;
             elif char not in self.intermap:
@@ -342,13 +236,13 @@ def main():
     arabic_sequence.write(reversed_arabic_sequence);
 
 if __name__=='__main__':
-    ex_sent=u'من کتاب دادم';
+    ex_sent=u'من زیاد خوردم. تُپرپ تُپر مشه.'    
     ins=transliter(ex_sent);
     print ins.arabic_to_unicode();
 
-    ex_sent_2=u'mn tw ra dÝdm';
+    ex_sent_2=u'mn zyad xwrdm. tpr tpr myše';
     ins_2=transliter(ex_sent_2);
     print ins_2.unicode_to_arabic();
 
-    main();
+    #main();
 
