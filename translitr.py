@@ -1,8 +1,8 @@
 
 # -*- coding:utf-8 -*-
 __authot__='Kensuke Mitsuzawa';
-__version__='0.08';
-__date__='2013/09/25';
+__version__='0.09';
+__date__='2013/10/04';
 
 import sys, codecs, itertools, re;
 
@@ -27,9 +27,9 @@ class transliter:
         
         for char in self.sequence: 
             if char in diacritics:
-                self.cleaned_sequence=self.sequence.replace(char, u'');
+                self.sequence=self.sequence.replace(char, u'');
 
-        return self.cleaned_sequence; 
+        return self.sequence; 
     
     def arabic_to_inter(self):
         "Input of this method is the unicode type of arabic(persian) character."
@@ -104,9 +104,9 @@ class transliter:
         #self.arabic_uni_map.setdefault(u"\u0650", 'arabic_kasra');
         self.arabic_uni_map.setdefault(u'\u0625', 'arabic_alef_hamza_below');
         self.arabic_uni_map.setdefault(u'\u0629', 'arabic_heh_marbuta');
-        self.arabic_uni_map.setdefault(u'\u06c0', 'arabic_heh_hamza_above');
         self.arabic_uni_map.setdefault(u'\u0695', 'arabic_r_small_v_below'); #u0695 is ڕ
-        self.arabic_uni_map.setdefault(u'\u064b', 'arabic_fathatan'); 
+        self.arabic_uni_map.setdefault(u'\u064b', 'arabic_fathatan');
+        self.arabic_uni_map.setdefault(u'ۀ', 'arabic_heh_yeh_above');
 
         return self.arabic_uni_map;
         #return self.sequence;
@@ -164,7 +164,7 @@ class transliter:
         self.char_map.setdefault('ch', u'č');
         self.char_map.setdefault('pe', u'p');
         self.char_map.setdefault('je', u'ž');
-        self.char_map.setdefault('arabic_heh_hamza_above', u'X');
+        self.char_map.setdefault('arabic_heh_yeh_above', u'X');
         self.char_map.setdefault('persian_ye', u'y');
         self.char_map.setdefault('arabic_ye', u'y');
         self.char_map.setdefault('zero', u'0');
@@ -243,6 +243,6 @@ if __name__=='__main__':
     ex_sent_2=u'mn zyad xwrdm. tpr tpr myše';
     ins_2=transliter(ex_sent_2);
     print ins_2.unicode_to_arabic();
-
+    
     #main();
 

@@ -61,7 +61,8 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 | م | mim | U+0645 | m |  
 | ن | nun | U+0646 | n |  
 | و | vav | U+0645 | w |  
-| ه | he | U+0647 | e |  
+| ه | he | U+0647 | e | 
+| ۀ | he_yeh_above | U+06C0 | X |  
 | ی | persian-ye | U+06CC | y |    
 | ي | arabic-ye | U+064A | Y |
 | ى | arabic_alef_maksusa | U+0649 | Ý |  
@@ -85,7 +86,8 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 * v0.05: Added new map for arabic tatweel and arabic decimal separator. An arabic tatweel is \u0640 in unicode and is reffered as keyname 'arabic_tatweel' in code. An arabic decimal separator is \u066b in unicode, and is reffered as keyname 'arabic_decimal_separator' in code.  
 * v0.06: some character + diacritic is added. u+0625, u+0629, u+06c0, u+0695, u+0624  
 * v0.07: arabic fathatan is added  
-* v0.08: A bug that clean_up function does not work solved. 
+* v0.08: A bug that clean_up function does not work solved.  
+* v0.09: ۀ is added   
 
 ## TODO
 
