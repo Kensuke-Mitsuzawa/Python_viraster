@@ -49,9 +49,9 @@ def main():
     parser.add_argument('-s', '--sep', required=False, default='\t', help='which separate type? t(tab)');
     parser.add_argument('-m', '--mode', required=True, help='a_l or l_a');
     parser.add_argument('-c_m', '--column_n', required=False, default=0, help='column number');
-    parser.add_argument('-w', '--whole', required=False, default=False, help='whole mode, True or False');
+    parser.add_argument('-w', '--whole', required=False, default=False, action='store_true',help='whole mode, True if -w flag');
     args=parser.parse_args();
-    if args.whole=="True": 
+    if args.whole==True: 
         transliteration_whole(args.input_file_path, args.output_file_path);
     elif args.mode=='l_a':
         latin_to_arabic(args.input_file_path, args.output_file_path, args.sep, args.column_n);
