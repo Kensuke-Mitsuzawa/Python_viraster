@@ -2,23 +2,28 @@
 # -*- coding:utf-8 -*-
 
 __author__='Kensuke Mitsuzawa'
-__version__='2013/09/11'
+__version__='2013/11/11'
 
 import translitr, sys, re, argparse, codecs;
 
 """
 This code is written for converting arabic and to latin and latin to arabic toward specific file.
 """
-def transliteration_whole(input_file_path, output_file_path):
+def transliteration_whole(input_file_path, output_file_path, mode):
     out=codecs.open(output_file_path, 'w', 'utf-8');
-    print 'OK'
+    print 'Whole Transliterate for document';
+    print 'Mode is {}'.format(mode);
     with codecs.open(input_file_path, 'r', 'utf-8') as input_line:
         for line in input_line:    
             Ins=translitr.transliter(line);
-            out.write(Ins.arabic_to_unicode());
+            if mode=='a_l':
+                out.write(Ins.arabic_to_unicode());
+            elif mode=='l_a':
+                out.write(Ins.unicode_to_arabic());
     out.close();
 
 def latin_to_arabic(input_file_path, output_file_path, sep_type, column_n):
+    print 'Transliterate from Latin to Arabic'
     out=codecs.open(output_file_path, 'w', 'utf-8');
     with codecs.open(input_file_path, 'r', 'utf-8') as input_line:
         for line in input_line:
@@ -32,6 +37,7 @@ def latin_to_arabic(input_file_path, output_file_path, sep_type, column_n):
     out.close();
 
 def arabic_to_latin(input_file_path, output_file_path, sep_type, column_n):
+    print 'Transliterate from Arabic to Latin'
     out=codecs.open(output_file_path, 'w', 'utf-8');
     with codecs.open(input_file_path, 'r', 'utf-8') as input_line:
         for line in input_line:
@@ -52,7 +58,7 @@ def main():
     parser.add_argument('-w', '--whole', required=False, default=False, action='store_true',help='whole mode, True if -w flag');
     args=parser.parse_args();
     if args.whole==True: 
-        transliteration_whole(args.input_file_path, args.output_file_path);
+        transliteration_whole(args.input_file_path, args.output_file_path, args.mode);
     elif args.mode=='l_a':
         latin_to_arabic(args.input_file_path, args.output_file_path, args.sep, args.column_n);
     elif args.mode=='a_l':

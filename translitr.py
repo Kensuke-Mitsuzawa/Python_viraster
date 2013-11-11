@@ -203,8 +203,8 @@ class transliter:
             self.converted_sequence=self.converted_sequence+self.unicode_char;
         return self.converted_sequence;
     def unicode_to_arabic(self):
-        char_map=self.unicode_original();
-        
+        self.char_map=self.unicode_original();
+         
         del self.char_map['arabic_keh']; del self.char_map['arabic_ye'];
         self.reversed_char_map=dict(zip(self.char_map.itervalues(), self.char_map.iterkeys())); 
         

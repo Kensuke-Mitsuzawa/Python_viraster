@@ -89,6 +89,3 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 * v0.08: A bug that clean_up function does not work solved.  
 * v0.09: ۀ is added   
 
-## TODO
-
-* u'\u0626'(Arabic ye hamza above) and u'\u0650'(Arabic Kasra) causes error. I don't wanna use such diacritic marks in unicode text. It's desirable to move out such diacritics before this script.  
