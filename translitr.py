@@ -1,10 +1,10 @@
-
+#! /usr/bin/python
 # -*- coding:utf-8 -*-
 __authot__='Kensuke Mitsuzawa';
-__version__='0.09';
-__date__='2013/10/04';
+__version__='0.10';
+__date__='2013/11/18';
 
-import sys, codecs, itertools, re;
+import os, sys, codecs, itertools, re, commands;
 
 class transliter:
     """
@@ -186,6 +186,40 @@ class transliter:
 
         return self.char_map;
 
+    def arabic_to_unicode_standard_farsi(self):
+        self.char_map=self.unicode_original();
+        self.intermap=self.arabic_to_inter();
+        #remove diacritic_marks form input sequece
+        self.cleaned_sequence=self.clean_up();
+        with codecs.open('./process_tmp_1', 'w', 'utf-8') as self.f:
+            self.f.write(self.cleaned_sequence);
+        #Use Pre_per2.rb here. About Pre_per2, look at http://stp.lingfil.uu.se/~mojgan/preper.html
+        status_tuple=commands.getstatusoutput('ruby1.8 ./pre_per2.rb {0} > {1}'.format('./process_tmp_1', './process_tmp_2'));
+        if status_tuple[0]!=0:
+            sys.exit(status_tuple);
+
+        self.unicode_char=u'';
+        self.converted_sequence=u'';
+        
+        f_obj=codecs.open('./process_tmp_2', 'r', 'utf-8'); 
+        line=f_obj.read();
+        f_obj.close();
+
+        self.line=line.strip(u'\n');
+        for char in self.line:
+            if char in self.exceptin_words:
+                self.unicode_char=char;
+            elif char not in self.intermap:
+                self.unicode_char=char; 
+            else:
+                self.unicode_char=self.char_map[self.intermap[char]];
+            self.converted_sequence=self.converted_sequence+self.unicode_char;
+
+        os.remove('./process_tmp_1');
+        os.remove('./process_tmp_2');
+        
+        return self.converted_sequence;
+
     def arabic_to_unicode(self):
         self.char_map=self.unicode_original();
         self.intermap=self.arabic_to_inter();
@@ -202,6 +236,7 @@ class transliter:
                 self.unicode_char=self.char_map[self.intermap[char]];
             self.converted_sequence=self.converted_sequence+self.unicode_char;
         return self.converted_sequence;
+
     def unicode_to_arabic(self):
         self.char_map=self.unicode_original();
          
@@ -236,13 +271,14 @@ def main():
     arabic_sequence.write(reversed_arabic_sequence);
 
 if __name__=='__main__':
-    ex_sent=u'من زیاد خوردم. تُپرپ تُپر مشه.'    
+    ex_sent=u'من زیاد میخورم .  من تُپ تُپ میشه.'
     ins=transliter(ex_sent);
     print ins.arabic_to_unicode();
-
-    ex_sent_2=u'mn zyad xwrdm. tpr tpr myše';
-    ins_2=transliter(ex_sent_2);
-    print ins_2.unicode_to_arabic();
     
-    #main();
+    ex_sent_2=u'من زیاد میخورم .  من تُپ تُپ میشه.'
+    ins_2=transliter(ex_sent_2);
+    print ins_2.arabic_to_unicode_standard_farsi();
 
+    ex_sent_3=u'mn zyad xwrdm. tpr tpr myše';
+    ins_3=transliter(ex_sent_3);
+    print ins_3.unicode_to_arabic();

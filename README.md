@@ -88,4 +88,5 @@ See also: http://jrgraphix.net/research/unicode_blocks.php?block=12
 * v0.07: arabic fathatan is added  
 * v0.08: A bug that clean_up function does not work solved.  
 * v0.09: ۀ is added   
+* v0.10: Per\_Per2 module is added with in this system. About Per\_per2.rb, please look at [here](http://stp.lingfil.uu.se/~mojgan/preper.html)
 
