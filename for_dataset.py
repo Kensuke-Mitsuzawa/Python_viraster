@@ -1,10 +1,9 @@
 #/usr/bin/python
 # -*- coding:utf-8 -*-
 __author__='Kensuke Mitsuzawa'
-__version__='2013/11/11'
+__version__='2013/11/19'
 
 import os, commands, translitr, sys, re, argparse, codecs;
-
 """
 This code is written for converting arabic and to latin and latin to arabic toward specific file.
 """
@@ -18,22 +17,33 @@ def transliteration_whole(input_file_path, output_file_path, args):
             status_tuple=commands.getstatusoutput('ruby1.8 ./pre_per2.rb {0} > {1}'.format(input_file_path, './tmp_file_1'));
             if status_tuple[0]!=0:
                 sys.exit(status_tuple);
-            with codecs.open('./tmp_file_1', 'r', 'utf-8') as input_line:
+            status_tuple=commands.getstatusoutput('nkf -w ./tmp_file_1 > conved');
+            if status_tuple[0]!=0:
+                sys.exit(status_tuple);
+            
+            with codecs.open('./conved', 'r', 'utf-8') as input_line:
                 for line in input_line:
                     Ins=translitr.transliter(line);
                     out.write(Ins.arabic_to_unicode());
         else:
-            with codecs.open(input_file_path, 'r', 'utf-8') as input_line:
-                for line in input_line:    
-                    Ins=translitr.transliter(line);
-                    out.write(Ins.arabic_to_unicode());
+            try:
+                file_obj=codecs.open(input_file_path, 'rb', 'utf-8');
+                for i, line in enumerate(file_obj.readlines()):    
+                        Ins=translitr.transliter(line);
+                        out.write(Ins.arabic_to_unicode());
+            except UnicodeDecodeError:
+                print u'Different Chara set is found.'
+                print u'Original sentence is :{} line at:{}'.format(line, i);
+
         os.remove('./tmp_file_1');
+        os.remove('./conved');
+        out.close();
     elif args.mode=='l_a':
         with codecs.open(input_file_path, 'r', 'utf-8') as input_line:
             for line in input_line:
                 Ins=transliter.transliter(line);
                 out.write(Ins.unicode_to_arabic());
-    out.close();
+        out.close();
 
 def latin_to_arabic(input_file_path, output_file_path, sep_type, column_n):
     print 'Transliterate from Latin to Arabic'
@@ -56,6 +66,9 @@ def arabic_to_latin(input_file_path, output_file_path, sep_type, column_n):
         status_tuple=commands.getstatusoutput('ruby1.8 ./pre_per2.rb {0} > {1}'.format(input_file_path, './tmp_file_1'));
         if status_tuple[0]!=0:
             sys.exit(status_tuple);
+        status_tuple=commands.getstatusoutput('nkf -w ./tmp_file_1 > conved');
+        if status_tuple[0]!=0:
+            sys.exit(status_tuple);
         with codecs.open('./tmp_file_1', 'r', 'utf-8') as input_line:
             for line in input_line:
                 items=line.split(sep_type);
@@ -65,6 +78,7 @@ def arabic_to_latin(input_file_path, output_file_path, sep_type, column_n):
                 elif column_n==-1:
                     out.write(sep_type.join(items[0:len(items)-1])+sep_type+Ins.arabic_to_unicode()+u'\n' );
                 #TODO　あと，ここに中間のindexに対する記述をしていく
+        os.remove('./conved');
         os.remove('./tmp_file_1');
 
     else:
